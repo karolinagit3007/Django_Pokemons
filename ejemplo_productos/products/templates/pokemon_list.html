@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}Lista de Pokémon{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+  <h1>Lista de Pokémon</h1>
+  <div class="d-flex flex-wrap gap-5 justify-content-center">
+    {% for pokemon in pokemons %}
+    <div class="card" style="width: 18rem;">
+      <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" class="card-img-top p-3" style="height: 200px; width: fit-content; max-width: 100%; margin-inline: auto;">
+      <div class="card-body">
+        <h2 class="card-title">{{ pokemon.name }}</h2>
+        <h4 class="card-text">Tipo: {{ pokemon.type }}</h4>
+        <p class="card-text text-truncate">Habilidades: {{ pokemon.abilities }}</p>
+        <a href="{% url 'pokemon_detail' pokemon.id %}" class="btn btn-primary">Ver Detalles</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
