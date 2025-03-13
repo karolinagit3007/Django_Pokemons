@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}Lista de Pokémon{% endblock %}
+
+{% block content %}
+
+<h1>{% if pokemon.id %}Editar{% else %}Crear{% endif %} Pokémon: {{ pokemon.name }}</h1>
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <label 
+            for="{{ field.id_for_label }}"
+            class="form-label">
+            {{ field.label }}
+        </label>
+        {{ field }}
+        {% if field.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ field.errors|striptags }}
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}    
+<button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+<a href="{% url 'pokemon_list' %}" class="btn btn-secondary">Cancelar</a>
+{% endblock %}
